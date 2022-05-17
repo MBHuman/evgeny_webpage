@@ -1,32 +1,17 @@
-import Logo from './logo'
-import { NextLink } from 'next/link'
-import {
-    Container,
-    Box,
-    Link,
-    Stack,
-    Heading,
-    Flex,
-    Menu,
-    MenuItem,
-    MenuList,
-    MenuButton,
-    IconButton,
-    useColorModeValue
-} from '@chakra-ui/react'
-import { HamburgerIcon } from '@chakra-ui/icons';
-import {IoLogoGithub} from 'react-icons/io5'
+import { Box, Flex, Heading, Stack, Link, useColorModeValue, Container } from "@chakra-ui/react"
+import NextLink from 'next/link'
+import { IoLogoGithub} from 'react-icons/io5'
 
-const LinkItem = ({href, path, target, children, ...props}) => {
-    const active = path === href
+const LinkItem = ({ href, path, _target, children, ...props }) => {
+    const active = path == href
     const inactiveColor = useColorModeValue('gray200', 'whiteAlpha.900')
     return (
         <NextLink href={href} passHref scroll={false}>
             <Link
-                p={2}
-                bg={active ? 'grassTeal' : undefined}
-                color={active ? "#202023" : inactiveColor}
-                target={target}
+                p={3}
+                bg={active ? 'grassTeal': undefined}
+                color={active ? '#202023' : inactiveColor}
+                _target={_target}
                 {...props}
             >
                 {children}
@@ -35,34 +20,64 @@ const LinkItem = ({href, path, target, children, ...props}) => {
     )
 }
 
-const Navbar = props => {
+
+const NavBar = props => {
     const { path } = props
 
     return (
         <Box
-            position={fixed}
-            as={nav}
+            position="fixed"
+            as="nav"
             w="100%"
-            bg={useColorModeValue('#ffffff40', '#2022380')}
-            css={{ backdropFilter: "blur(10px)"}}
+            bg={useColorModeValue('#ffffff40', '#20202380')}
+            css={{ backdropFilter: 'blur(10px)'}}
             zindex={1}
             {...props}
         >
             <Container
+                display="flex"
+                p={2}
+                maxW="container.md"
+                wrap="wrap"
+                align="center"
+                justify="space-between"
             >
-                <Flex>
-                    <Heading>
-                        <Logo/>
-                    </Heading>
-                </Flex>
-                
-                <Stack>
-                    
-                </Stack>
+                {/* {/* <Flex align="center" mr={5}>
+                    <Heading as="h1" size="lg" letterSpacing={'tighter'}>
 
+                    </Heading>
+                </Flex> */}
+
+                <Stack
+                    direction={{base: 'column', md: 'row'}}
+                    display={{base: 'none', md: 'flex'}}
+                    width={{base: 'full', md: 'auto'}}
+                    alignItems="center"
+                    flexGrow={1}
+                    mt={{base:4, md:0}}
+                >
+                    <LinkItem href="/works" path={path}>
+                        Works
+                    </LinkItem>
+                    <LinkItem href="/posts" path={path}>
+                        Posts
+                    </LinkItem>
+                    <LinkItem
+                        _target="_blank"
+                        href="https://github.com/MBHuman"
+                        display="inline-flex"
+                        alignItems="center"
+                        style={{ gap: 4 }}
+                        pl={2}
+                    >
+                        <IoLogoGithub/>
+                        Source                       
+                    </LinkItem>
+                </Stack> 
+                
             </Container>
         </Box>
     )
 }
 
-export default Navbar
+export default NavBar
