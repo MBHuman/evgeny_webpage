@@ -1,4 +1,4 @@
-import { Box, Container, Heading, useColorModeValue } from '@chakra-ui/react';
+import { Link, Box, Container, Heading, useColorModeValue } from '@chakra-ui/react';
 import Layout from '../components/layouts/article'
 import Image from 'next/image';
 import {chakra, Button} from '@chakra-ui/react'
@@ -7,7 +7,6 @@ import Paragraph from '../components/paragraph';
 import NextLink from 'next/link'
 import { ChevronRightIcon } from '@chakra-ui/icons';
 import { BioSection, BioYear } from '../components/bio';
-
 
 const ProfileImage = chakra(Image, {
     shouldForwardProp: prop => ['width', 'height', 'src', 'alt'].includes(prop)
@@ -86,6 +85,18 @@ const Home = () => {
                     <BioSection>
                         <BioYear>2001</BioYear>
                     </BioSection>
+                </Section>
+
+                <Section delay={0.3}>
+                    <Heading as="h3" variant="section-title">
+
+                    </Heading>
+                    <Paragraph>
+                        Art, Music
+                        <Link href="" target="_blank">
+                            Draw
+                        </Link>
+                    </Paragraph>
                 </Section>
             </Container>
         </Layout>
